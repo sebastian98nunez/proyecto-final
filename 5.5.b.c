@@ -2,9 +2,9 @@
 #include <stdlib.h>
 
 void strcat(char *t, char *s,int n){
-    while(*s!='\0')
+    while(*s!='\0') //leva al fin de s
         s++;
-    while(n>0&&(*s++=*t++)!='\0')
+    while(n>0&&(*s++=*t++)!='\0')//reemplaza de t a s
         n--;
     *s='\0';
 }
