@@ -10,7 +10,7 @@ int main()
 {
     char s[]="abc";
     char t[]="adefgffdh";
-    strcat(t,s);//se copia solo 2 caracteres de t a s
+    strcat(t,s);//compara 2 cadenas
     printf("%s",s);
 }
 
