@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+//cambia a un numero
 int ato(char *s){
     int num=0;
     while(*s != '\0'){
