@@ -15,9 +15,33 @@ void ordenar(char *d){
             strcpy(*d , *(d+1));
             strcpy(*(d+1),temp);
         }
-        d++;
+        d++;      
 }
 }
+void qsort(char **ptr, int left , int right ){
+	int i,last;
+	void swap(char **ptr , int i , int j);
+
+	if (left > right)
+		return;
+	swap( ptr , left , (left+ right) /2);
+	last=left;
+	for( i= left+1 ; i <= right ; i++);
+	swap(ptr,left,last);
+	qsort(ptr,left,last-1);
+	qsort(ptr,last+1,right);
+	}
+
+void swap(char *ptr , int i , int j){
+	char temp[];
+	strcpy(temp,*(ptr+i));
+	strcpy(*(ptr+i),*(ptr+j));
+	strcpy(*(ptr+j),temp);
+}
+
+int main()
+    char *c[]={"hola", "juan","pedro", "roberto"}
+    qsort(c,0,3)
 
 
 int main(){
