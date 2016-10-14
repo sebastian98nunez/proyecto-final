@@ -101,14 +101,14 @@ void insertarmedio(struct node *head, int element){
         cont++;
     }
     cont= cont/2;
-    while(prev->value != (cont)-1){
+    while(prev->value != (cont)){
         prev=prev->next;
     }
+    curr=prev->next;
     tempo=malloc(sizeof(struct node));
     tempo->value=element;
-    tempo->next=prev->next;
+    tempo->next=curr;
     prev->next=tempo;
-    free(cont);
     }
 
 struct node *insertarinicio(struct node *head, int elemento){
