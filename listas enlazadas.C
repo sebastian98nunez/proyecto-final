@@ -57,6 +57,7 @@ void insertarenorden(struct node *head, int element){
 
 }
 
+
 void  concatenar(struct node *head, struct node *head2){
     struct node *cont;
     cont=malloc(sizeof(struct node));
@@ -122,14 +123,14 @@ struct node *insertarinicio(struct node *head, int elemento){
 
 int main(){
     struct node *head, *head2;
-    head=crear(12);
+    head=crear(20);
     head2=crear(20);
-    borrar(10,head);
+    borrar(5,head);
     concatenar(head,head2);
     imprimir(head);
     printf("%c",('\n'));
     head=insertarinicio(head,5);
-    insertarenorden(head,10);
+    insertarenorden(head,5);
     insertarmedio(head,60);
     imprimir(head);
 }
