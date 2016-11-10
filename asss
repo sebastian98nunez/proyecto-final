@@ -1,0 +1,82 @@
+#ifndef PILA_H
+#define PILA_H
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+template < class T >
+
+class Pila{
+    private:
+        vector< T >elementos;
+
+    public:
+    bool empty(){
+        if (elementos.empty()){
+            cout<< "esta vacio"<<endl;
+            return true;}
+        else{
+            cout << "no esta vacio"<<endl;
+             return false;}
+    };
+
+    void push(const T &item){
+        elementos.push_back(item);
+    };
+
+    T& top(){
+        return elementos.back();
+    };
+
+    void pop(){
+        if (elementos.empty())
+            return ;
+        else
+            elementos.pop_back();
+    };
+    void print(){
+        for(int i=0; i< elementos.size() ; i++)
+            cout<< elementos[i]<< " ";
+        cout << endl;
+    };
+
+};
+
+
+#endif // PILA_H
+
+
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+#include <Pila.h>
+using namespace std;
+
+int main()
+{
+    Pila<int> Stack;
+    Stack.empty();
+    Stack.pop();
+    Stack.push(16);
+    Stack.empty();
+    Stack.push(17);
+    Stack.print();
+    Stack.pop();
+    Stack.print();
+    Stack.push(23);
+    int a=Stack.top();
+    cout<<a;
+
+    return 0;
+}
