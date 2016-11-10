@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+template<typename T>
+
+T Min(T a , T b){
+    if (a > b)
+    return b;
+    else
+    return a;
+}
+template<typename T>
+
+T Min2(T a , T b){
+    return (a > b) ? b : a;
+}
+
+
+int main()
+{
+    int h= Min(7, 9);
+    float j= Min2(5.7, 6.9);
+
+    cout << h << endl;
+    cout << j << endl;
+    return 0;
+}
