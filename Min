@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#define Min2(a,b)((a>b)?b:a)
 using namespace std;
 
 template<typename T>
@@ -9,11 +10,6 @@ T Min(T a , T b){
     return b;
     else
     return a;
-}
-template<typename T>
-
-T Min2(T a , T b){
-    return (a > b) ? b : a;
 }
 
 
