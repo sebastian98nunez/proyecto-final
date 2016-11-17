@@ -7,7 +7,6 @@ using namespace std;
 //Constructor de Tablero en blanco
 Tablero::Tablero()
 {
-	endGame = false;
 	playerInTurn = 1;
 	for(int i=0; i<6; i++){
 		for(int j=0; j<7; j++){
@@ -16,11 +15,6 @@ Tablero::Tablero()
 }
 }
 
-//Modificadores de acceso
-bool Tablero::getEndGame()
-{
-	return endGame;
-}
 
 int Tablero::getPlayer()
 {
@@ -31,7 +25,7 @@ int Tablero::getPlayer()
 //Revisa si queda espacio en la columna
 bool Tablero::columnFull(int columna)
 {
-    if(map[1][columna]!=0)
+    if(map[0][columna]!=0)
         return true;
     return false;
 
@@ -40,7 +34,7 @@ bool Tablero::columnFull(int columna)
 //Buscar el primer espacio disponible
 int Tablero::searchFila(int columna)
 {
-	for(int fila=6; fila>0; fila--)
+	for(int fila=6; fila>=0; fila--)
 	{
 		if(map[fila][columna]==0)
 			return fila;
@@ -52,7 +46,8 @@ int Tablero::searchFila(int columna)
 //Insertar la ficha del jugador
 void Tablero::addFicha(int columna)
 {
-	    map[searchFila(columna)][columna]= playerInTurn;
+	    map[searchFila(columna-1)][columna-1]= playerInTurn;
+	    changePlayer();
 }
 
 
@@ -65,7 +60,7 @@ void Tablero::changePlayer()
 		playerInTurn=1;
 }
 
-//Función auxiliar que busca en todas las direcciones
+//FunciÃ³n auxiliar que busca en todas las direcciones
 bool Tablero::searchLine(int direction, int i, int j){
     int posy = i;
 	int posx = j;
@@ -77,7 +72,7 @@ bool Tablero::searchLine(int direction, int i, int j){
         switch (direction){
             case 1://En vertical
                 Vali2=false;
-                posy--;
+                posy++;
             case 2://En horizontal
                 if (Vali1)
                     posx ++;
@@ -86,27 +81,29 @@ bool Tablero::searchLine(int direction, int i, int j){
             case 3://En diagonal derecha
                 if(Vali1){
                     posx++;
-                    posy++;}
+                    posy--;}
                 else if (Vali2){
                     j--;
-                    i--;}
+                    i++;}
             case 4://En diagonal izquierda
                 if(Vali1){
                         posx++;
-                        posy--;}
+                        posy++;}
                 else if (Vali2){
                         j--;
-                        i++;}
+                        i--;}
         }
 
-        if(posy > 0 && posy < 7 && posx > 0 && posx < 8){
+        if(posy > 0 && posy < 7 && posx > 0 && posx < 8&& i > 0 && i < 7 && j > 0 && j < 8){
             if (Vali1)
                 Vali1=false;
             else if(Vali2)
                 Vali2=false;
         }
-		else if(map[posx][posy]==playerInTurn)
-			path.add_end(posx*10+posy);//Guardamos las posición x,y en un solo número
+		else if(map[posx][posy]==playerInTurn){
+			path.add_end(posx*10+posy);//Guardamos las posiciÃ³n x,y en un solo nÃºmero
+			path.print();
+		}
 		else{
 			if(Vali1)
                 Vali1=false;
@@ -125,10 +122,9 @@ bool Tablero::searchLine(int direction, int i, int j){
 	return false;
 }
 
-bool Tablero::win(){
-    for(int it=0 ;it <=4; it++){
-        if (searchLine(it, posy,posx)){
-            endGame=true;
+bool Tablero::win(int posx){
+    for(int i=1 ;i <=4; i++){
+        if (searchLine(i, searchFila(posx-1),posx-1)){
             return true;
         }
     }
@@ -141,28 +137,11 @@ void Tablero::printTablero(){
 	{
 		for(int j=0; j<7; j++)
 		{
-			if(map[i][j]==0)
-			{
-				cout<< "[ ]";
-			}
-			else if(map[i][j]==1)
-			{
-				cout<< "["<< "1"<<"]";
-			}
-			else if(map[i][j]==2)
-			{
-				cout<< "["<< "2"<<"]";
-			}
-			else if(map[i][j]==3)
-			{
-				cout<< "3";
-			}
-			else if(map[i][j]==9)
-			{
-				cout<< "";
-			}
+		    if (map[i][j]==0)
+                cout<< "[ ]";
+            else
+                cout<< "["<< map[i][j]<<"]";
 		}
 		cout<< "\n";
 	}
 }
-
