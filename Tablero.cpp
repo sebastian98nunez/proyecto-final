@@ -1,4 +1,6 @@
 #include "Tablero.h"
+#include "Lista.h"
+#include "Lista.cpp"
 
 using namespace std;
 
@@ -7,29 +9,12 @@ Tablero::Tablero()
 {
 	endGame = false;
 	playerInTurn = 1;
-	for(int i=0; i<8; i++)
-	{
-		for(int j=0; j<9; j++)
-		{
-			if(i==0 || i==7)
-			{
-				map[i][j]=9;
-			}
-			else
-			{
-				if(j==0 || j==8)
-				{
-					map[i][j]=9;
-				}
-				else
-				{
+	for(int i=0; i<6; i++){
+		for(int j=0; j<7; j++){
 					map[i][j]=0;
-				}
-			}
 		}
-	}
 }
-
+}
 
 //Modificadores de acceso
 bool Tablero::getEndGame()
@@ -80,48 +65,55 @@ void Tablero::changePlayer()
 		playerInTurn=1;
 }
 
-//Funci√≥n auxiliar que busca en todas las direcciones
-bool Tablero::searchLine(int direction, int i, int j)
-{
-	bool endPath = false;
-	int counter = 1;
-	int posx = i;
-	int posy = j;
-	List<int> path;
-	path.add_head(posx*10+posy);
-	while(endPath==false)
-	{
-		if(direction==1)//En vertical
-		{
-			posx++;
-		}
-		else if(direction==2)//En horizontal
-		{
-			posy++;
-		}
-		else if(direction==3)//En diagonal derecha
-		{
-			posx++;
-			posy++;
-		}
-		else if(direction==4)//En diagonal izquierda
-		{
-			posx++;
-			posy--;
-		}
+//FunciÛn auxiliar que busca en todas las direcciones
+bool Tablero::searchLine(int direction, int i, int j){
+    int posy = i;
+	int posx = j;
+	bool Vali1 = true;
+	bool Vali2 = true;
+	Lista<int> path;
+	path.add_head(posy*10+posx);
+	while(Vali1 || Vali2){
+        switch (direction){
+            case 1://En vertical
+                Vali2=false;
+                posy--;
+            case 2://En horizontal
+                if (Vali1)
+                    posx ++;
+                else if(Vali2)
+                    i--;
+            case 3://En diagonal derecha
+                if(Vali1){
+                    posx++;
+                    posy++;}
+                else if (Vali2){
+                    j--;
+                    i--;}
+            case 4://En diagonal izquierda
+                if(Vali1){
+                        posx++;
+                        posy--;}
+                else if (Vali2){
+                        j--;
+                        i++;}
+        }
 
-		if(map[posx][posy]==playerInTurn)
-		{
-			path.add_head(posx*10+posy);//Guardamos las posici√≥n x,y en un solo n√∫mero
-			counter++;
-		}
-		else
-		{
-			endPath = true;
-		}
-		if(counter==4)
-		{
-			for(int i=0; i<4; i++)
+        if(posy > 0 && posy < 7 && posx > 0 && posx < 8){
+            if (Vali1)
+                Vali1=false;
+            else if(Vali2)
+                Vali2=false;
+        }
+		else if(map[posx][posy]==playerInTurn)
+			path.add_end(posx*10+posy);//Guardamos las posiciÛn x,y en un solo n˙mero
+		else{
+			if(Vali1)
+                Vali1=false;
+            else if (Vali2)
+                Vali2=false;}
+		if(path.getNum()==4){
+			for(int m=0; m<4; m++)
 			{
 				int a=path.pop();
 				map[a/10][a%10]=3;
@@ -129,67 +121,48 @@ bool Tablero::searchLine(int direction, int i, int j)
 			return true;
 		}
 	}
+	path.del_all();
 	return false;
 }
 
-
-
-//Comprueba si un jugador ha ganado
-bool Tablero::win()
-{
-	for(int i=1; i<7; i++)
-	{
-		for(int j=1; j<8; j++)
-		{
-			if(map[i][j]==playerInTurn)
-			{
-				if(searchLine(1,i,j)==true)//En vertical
-				{
-					endGame = true;
-					return true;
-				}
-				else if(searchLine(2,i,j)==true)//En horizontal
-				{
-					endGame = true;
-					return true;
-				}
-				else if(searchLine(3,i,j)==true)//En diagonal derecha
-				{
-					endGame = true;
-					return true;
-				}
-				else if(searchLine(4,i,j)==true)//En diagonal izquierda
-				{
-					endGame = true;
-					return true;
-				}
-			}
-		}
-	}
-	return false;
+bool Tablero::win(){
+    for(int it=0 ;it <=4; it++){
+        if (searchLine(it, posy,posx)){
+            endGame=true;
+            return true;
+        }
+    }
 }
 
-//Comprueba si a√∫n hay espacio en el tablero
-bool Tablero::space()
-{
-	bool full = true;
-	for(int i=1; i<7; i++)
+
+void Tablero::printTablero(){
+    cout<<" 1  2  3  4  5  6  7"<<"\n";
+	for(int i=0; i<6; i++)
 	{
-		for(int j=1; j<8; j++)
+		for(int j=0; j<7; j++)
 		{
 			if(map[i][j]==0)
 			{
-				full = false;
+				cout<< "[ ]";
+			}
+			else if(map[i][j]==1)
+			{
+				cout<< "["<< "1"<<"]";
+			}
+			else if(map[i][j]==2)
+			{
+				cout<< "["<< "2"<<"]";
+			}
+			else if(map[i][j]==3)
+			{
+				cout<< "3";
+			}
+			else if(map[i][j]==9)
+			{
+				cout<< "";
 			}
 		}
-	}
-	if(full==true)
-	{
-		endGame = true;
-		return false;
-	}
-	else
-	{
-		return true;
+		cout<< "\n";
 	}
 }
+
