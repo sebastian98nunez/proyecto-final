@@ -7,8 +7,7 @@
 class Tablero
 {
 	protected:
-		int map[8][9];
-		bool endGame;
+		int map[6][7];
 		int playerInTurn;
 	public:
 		Tablero();
@@ -21,8 +20,35 @@ class Tablero
 		void addFicha(int);
 		void changePlayer();
 		bool searchLine(int,int,int);
-		bool win();
+		bool win(int);
 		bool space();
 
 };
 #endif
+    
+
+
+
+
+/*#include <iostream>
+#include <Tablero.h>
+#include <stdlib.h>
+using namespace std;
+
+int main()
+{
+    Tablero Tab;
+    Tab.printTablero();
+    int posx, posy;
+    posx=posy=0;
+    while(!Tab.win(posx)){
+        cout<<"ingrese la posicion x ";
+        cin>>posx;
+        cout <<endl;
+        Tab.addFicha(posx);
+        //system("cls");
+        Tab.printTablero();
+    }
+    if(Tab.win(posx))
+        cout<<"Gano el jugador "<<Tab.getPlayer();
+}*/
