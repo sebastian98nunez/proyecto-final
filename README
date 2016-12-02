@@ -1,1 +1,33 @@
-Rpositorio(5%)  README (5%)  legilibilidad (10%9  POO 40  STL,Templtes 30   Patrones 10
+Bienvenido a Te Original Game of Connect 4.
+
+1CONTROLES:
+-Usa el mouse para navegar por el menú.
+-Al momento de jugar utiliza las teclas direccionales(derecha o arriba) para ir a la columna de la derecha e (izquierda o abajo) para desplazar la flecha a la columna derecha.
+-Para hacer caer una ficha presiona la tecla espacio.
+-Con la tecla A remueves la última ficha de la columna en la que estes.(SOLO EN MODO POP)
+-Si quieres regresar al menú presiona la tecla C.
+
+
+2¿Cómo navegar por el menú?
+
+Tan solo clickea en la opción que desees observar.
+
+Puedes escoger entre estas opciones:
+
+NUEVO JUEGO: Al hacer clic aquí te llevará a los modos de juegos los cuales son los siguientes:
+
+	CLASSIC (porque lo clásico no pasa de moda) Juega Connect 4 en el modo tradicionaL.Selecciona la columna en la que deseas ingresar la ficha y presiona espacio. Recuerda que caerá hasta el fondo del tablero. El juego transcurrirá por turnos hasta que uno de los dos jugadores logre conectar 4 de sus fichas en cualquier dirección (horizontal, vertical o diagonal). Los marcadores indican el turno y el puntaje de cada jugador. El puntaje disminuye con cada turno; entre más rápido consigas hacerte con la victoria, mejor será tu puntuación.
+
+	POP (la gravedad es tu amiga) Si ya hay al menos una ficha en el tablero, podrás escoger entre añadir una ficha(PRESIONANDO ESPACIO) o removerla del fondo de su columna(PRESIONANDO A). Cuando una ficha es removida, las que están encima de esta caerán por acción de la gravedad hasta tocar el fondo. Aprovecha esta opción para reacomodar la posición de las fichas y darle un giro al juego.
+
+	CONNECT 5 (cuando 4 no son suficientes) Los jugadores tienen que conectar 5 fichas para ganar. Presta atención a las nuevas columnas disponibles.
+
+	CONNECT 3 (para los que no tienen tiempo) La partida concluye rápidamente pues solo necesitas conectar 3 fichas para ganar.
+
+HIGH SCORES (demuéstrales a los demás quién es el mejor) Visualiza las 3 mejores puntuaciones. Cuando ganes un juego, registra tu puntuación ingresando tu nombre (¡no puede incluir espacios en blanco ni numeros!).
+
+SALIR (¿tuviste suficiente?) Finaliza el programa.
+
+3. Problemas y desafíos
+
+El problema de mayor dificultad a la hora de programar el uso de la librería gráfica . El mayor desafío fue poder dar herencia y el uso del memento.
